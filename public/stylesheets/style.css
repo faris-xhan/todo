@@ -4,3 +4,18 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box; }
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; }
+  body > header,
+  body > footer {
+    background-color: aliceblue;
+    padding: 1rem; }
+  body > footer {
+    text-align: center; }
+  body > .app {
+    /* Grow the app so footer remains at the end always */
+    flex-grow: 1;
+    padding: 1rem; }
