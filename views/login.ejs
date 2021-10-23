@@ -1,12 +1,25 @@
 <main>
    <form action="/login" method="POST">
+      <p><%= locals?.message %></p>
       <div class="form-item">
          <label for="uname">Username </label>
-         <input type="text" name="" id="uname" />
+         <input
+            type="text"
+            name="uname"
+            id="uname"
+            placeholder="Enter email"
+            value="<%= locals?.uname   %>"
+         />
       </div>
       <div class="form-item">
          <label for="passwd">Password </label>
-         <input type="text" name="" id="passwd" />
+         <input
+            type="text"
+            name="passwd"
+            id="passwd"
+            placeholder="Password"
+            value="<%= locals?.passwd  %>"
+         />
       </div>
       <button type="submit">Log in</button>
    </form>
