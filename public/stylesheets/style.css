@@ -13,6 +13,15 @@ body {
   body > footer {
     background-color: aliceblue;
     padding: 1rem; }
+  body > header > a {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.02rem;
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: rgba(240, 7, 54, 0.753); }
+  body > header > a:hover {
+    color: #eb0d39; }
   body > footer {
     text-align: center; }
   body > .app {
