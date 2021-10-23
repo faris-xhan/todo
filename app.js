@@ -8,12 +8,16 @@ const expressEjsLayout = require("express-ejs-layouts");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
 const config = require("./configs");
 
+/* GLOBALS  */
+const PUBLIC_PATH = path.resolve(__dirname, "public");
+const VIEWS_PATH = path.resolve(__dirname, "views");
+
 const app = express();
 
 /* view engine setup */
 app.use(expressEjsLayout);
 app.set("layout", "layout/layout");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", VIEWS_PATH);
 app.set("view engine", "ejs");
 
 /* Middlewares */
@@ -24,7 +28,7 @@ app.use(cookieParser());
 app.use(sassMiddleware(config.sassConfig));
 
 /* Static */
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(PUBLIC_PATH));
 
 /* Routes */
 app.use("/", indexRouter);
