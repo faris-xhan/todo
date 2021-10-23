@@ -4,11 +4,14 @@ const express = require("express");
 const indexRouter = require("./routes/index");
 const cookieParser = require("cookie-parser");
 const sassMiddleware = require("node-sass-middleware");
+const expressEjsLayout = require("express-ejs-layouts");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
 
 const app = express();
 
 /* view engine setup */
+app.use(expressEjsLayout);
+app.set("layout", "layout/layout");
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
