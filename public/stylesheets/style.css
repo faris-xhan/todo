@@ -71,3 +71,8 @@ body {
     font-size: 2rem;
     text-decoration: none;
     font-weight: bold; }
+  .container .todo-list {
+    list-style: none;
+    padding: 1rem; }
+    .container .todo-list li {
+      padding: 0.5rem; }

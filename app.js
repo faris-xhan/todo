@@ -5,6 +5,7 @@ const config = require("./configs");
 const indexRouter = require("./routes/index");
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
+const dashboardRouter = require("./routes/dashboard");
 const sassMiddleware = require("node-sass-middleware");
 const expressEjsLayout = require("express-ejs-layouts");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
@@ -34,6 +35,7 @@ app.use(express.static(PUBLIC_PATH));
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/dashboard", dashboardRouter);
 
 /* Handle All The Errors */
 app.use(catchAllNotFound);
