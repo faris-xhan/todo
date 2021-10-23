@@ -1,12 +1,11 @@
 const path = require("path");
 const logger = require("morgan");
 const express = require("express");
+const config = require("./configs");
 const indexRouter = require("./routes/index");
-const cookieParser = require("cookie-parser");
 const sassMiddleware = require("node-sass-middleware");
 const expressEjsLayout = require("express-ejs-layouts");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
-const config = require("./configs");
 
 /* GLOBALS  */
 const PUBLIC_PATH = path.resolve(__dirname, "public");
@@ -24,7 +23,6 @@ app.set("view engine", "ejs");
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(sassMiddleware(config.sassConfig));
 
 /* Static */
