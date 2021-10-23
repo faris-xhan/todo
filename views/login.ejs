@@ -1,26 +1,30 @@
 <main>
-   <form action="/login" method="POST">
-      <p><%= locals?.message %></p>
-      <div class="form-item">
-         <label for="uname">Username </label>
-         <input
-            type="text"
-            name="uname"
-            id="uname"
-            placeholder="Enter email"
-            value="<%= locals?.uname   %>"
-         />
-      </div>
-      <div class="form-item">
-         <label for="passwd">Password </label>
-         <input
-            type="text"
-            name="passwd"
-            id="passwd"
-            placeholder="Password"
-            value="<%= locals?.passwd  %>"
-         />
-      </div>
-      <button type="submit">Log in</button>
-   </form>
+   <div class="form-wrapper">
+      <form action="/login" method="POST">
+         <h1>Login</h1>
+
+         <p><%= locals?.message%></p>
+         <div class="form-item">
+            <label for="uname">Username </label>
+            <input
+               type="text"
+               name="uname"
+               id="uname"
+               placeholder="Enter email"
+               value="<%= locals?.uname   %>"
+            />
+         </div>
+         <div class="form-item">
+            <label for="passwd">Password </label>
+            <input
+               type="text"
+               name="passwd"
+               id="passwd"
+               placeholder="Password"
+               value="<%= locals?.passwd  %>"
+            />
+         </div>
+         <button type="submit" class="btn">Log in</button>
+      </form>
+   </div>
 </main>

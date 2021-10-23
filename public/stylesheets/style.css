@@ -28,3 +28,32 @@ body {
     /* Grow the app so footer remains at the end always */
     flex-grow: 1;
     padding: 1rem; }
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .form-wrapper form {
+    font-size: 2rem;
+    text-align: center; }
+    .form-wrapper form > h1 {
+      padding: 1rem 0;
+      text-align: center;
+      margin-bottom: 5px; }
+    .form-wrapper form > p {
+      padding: 5px 0; }
+    .form-wrapper form .form-item {
+      width: 100%;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr 2fr;
+      margin-bottom: 5px; }
+      .form-wrapper form .form-item input {
+        padding: 0 1rem; }
+
+.btn {
+  padding: 9px 50px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background-color: darkgray; }
