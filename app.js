@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const sassMiddleware = require("node-sass-middleware");
 const expressEjsLayout = require("express-ejs-layouts");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
+const config = require("./configs");
 
 const app = express();
 
@@ -20,13 +21,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(
-   sassMiddleware({
-      src: path.join(__dirname, "public"),
-      dest: path.join(__dirname, "public"),
-      indentedSyntax: false, // true = .sass and false = .scss
-   })
-);
+app.use(sassMiddleware(config.sassConfig));
 
 /* Static */
 app.use(express.static(path.join(__dirname, "public")));
