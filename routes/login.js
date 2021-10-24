@@ -1,11 +1,12 @@
 const express = require("express");
+const userServices = require("../services/userServices");
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
    res.render("login", { title: "TODO - Login" });
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
    const { uname, passwd } = req.body;
 
    if (!uname || !passwd) {
@@ -16,11 +17,12 @@ router.post("/", (req, res, next) => {
       });
    }
 
-   return res.render("login", {
-      uname: uname,
-      passwd: passwd,
-      message: "User logged in succesfully",
-   });
+   try {
+      const rows = await userServices.getUser(uname, passwd);
+      return res.json(rows);
+   } catch (error) {
+      next(error);
+   }
 });
 
 module.exports = router;
