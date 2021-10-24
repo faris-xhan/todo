@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", privateRoute, async (req, res, next) => {
    try {
       const todos = await getTodos(req.session.uid);
-      res.render("dashboard", {
+      return res.render("dashboard", {
          title: "Dashboard",
          user: {
             uname: req.session.uname,
