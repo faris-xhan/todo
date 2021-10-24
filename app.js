@@ -10,6 +10,7 @@ const sassMiddleware = require("node-sass-middleware");
 const expressEjsLayout = require("express-ejs-layouts");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
 const session = require("express-session");
+const flash = require("express-flash");
 
 /* GLOBALS  */
 const PUBLIC_PATH = path.resolve(__dirname, "public");
@@ -29,6 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(sassMiddleware(config.sassConfig));
 app.use(session(config.session));
+app.use(flash());
 
 /* Static */
 app.use(express.static(PUBLIC_PATH));
