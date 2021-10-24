@@ -1,11 +1,12 @@
 const express = require("express");
+const userServices = require("../services/userServices");
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
    res.render("register", { title: "TODO - Login" });
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
    const { uname, passwd, email } = req.body;
 
    if (!uname || !passwd || !email) {
@@ -17,12 +18,12 @@ router.post("/", (req, res, next) => {
       });
    }
 
-   return res.render("register", {
-      uname,
-      passwd,
-      email,
-      message: "User created succesfully",
-   });
+   try {
+      const result = await userServices.createUser(uname, email, passwd);
+      return res.json(result);
+   } catch (error) {
+      next(error);
+   }
 });
 
 module.exports = router;
