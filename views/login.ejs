@@ -11,7 +11,7 @@
                name="uname"
                id="uname"
                placeholder="Enter Username"
-               value="<%= locals?.uname %>"
+               value="<%= locals?.uname || locals?.messages?.uname %>"
             />
          </div>
          <div class="form-item">
@@ -21,7 +21,7 @@
                name="passwd"
                id="passwd"
                placeholder="Password"
-               value="<%= locals?.passwd  %>"
+               value="<%= locals?.passwd || locals?.messages?.passwd  %>"
             />
          </div>
          <button type="submit" class="btn">Log in</button>
