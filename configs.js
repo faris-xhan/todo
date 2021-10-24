@@ -1,4 +1,7 @@
+require("dotenv").config();
 const path = require("path");
+const env = process.env;
+
 const config = {
    sassConfig: {
       src: path.join(__dirname, "public"),
@@ -9,6 +12,12 @@ const config = {
       secret: "MyLittleSecret",
       resave: true,
       saveUninitialized: true,
+   },
+   db: {
+      host: env.DB_HOST || "localhost",
+      user: env.DB_USER || "root",
+      password: env.DB_PASSWORD || "root",
+      database: env.DB_NAME || "test",
    },
 };
 
