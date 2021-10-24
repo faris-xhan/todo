@@ -19,7 +19,13 @@ router.post("/", async (req, res, next) => {
 
    try {
       const rows = await userServices.getUser(uname, passwd);
-      return res.json(rows);
+      if (rows.length) {
+         res.redirect("/dashboard");
+      }
+      req.flash("feedback", "Username or password doesn't exists");
+      req.flash("uname", uname);
+      req.flash("passwd", passwd);
+      return res.redirect("/login");
    } catch (error) {
       next(error);
    }
