@@ -1,5 +1,5 @@
 const privateRoute = (req, res, next) => {
-   if (req.sessionID) {
+   if (req.session.uname) {
       return next();
    }
 

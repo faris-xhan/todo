@@ -1,5 +1,5 @@
 const publicRoute = (req, res, next) => {
-   if (req.sessionID) {
+   if (req.session.uname) {
       return res.redirect("/dashboard");
    }
 
