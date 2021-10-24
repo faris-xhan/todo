@@ -16,7 +16,17 @@ const createTodo = async (owner_id, task) => {
    return result;
 };
 
+const removeTodo = async (id, owner_id) => {
+   const result = await db.query(
+      `DELETE FROM todosList WHERE id = ? AND owner_id = ?`,
+      [id, owner_id]
+   );
+
+   return result;
+};
+
 module.exports = {
    getTodos,
    createTodo,
+   removeTodo,
 };

@@ -11,10 +11,8 @@
       <ul class="todo-list">
          <% locals?.todoList && todoList.forEach(todo => { %>
          <li>
-            <%= todo %> -
-            <form action="/dashboard/todo" method="get">
-               <button type="submit">Remove</button>
-            </form>
+            <%= todo.task %> -
+            <a href="/dashboard/todo/<%= todo.id %>">Remove</a>
          </li>
          <% }) %>
       </ul>

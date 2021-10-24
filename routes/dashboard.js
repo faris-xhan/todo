@@ -1,6 +1,10 @@
 const express = require("express");
 const privateRoute = require("../middlewares/privateRoute");
-const { getTodos, createTodo } = require("../services/todosListService");
+const {
+   getTodos,
+   createTodo,
+   removeTodo,
+} = require("../services/todosListService");
 const router = express.Router();
 
 /* GET home page. */
@@ -11,7 +15,7 @@ router.get("/", privateRoute, async (req, res, next) => {
          title: "Dashboard",
          uname: req.session.uname,
          feedback: req.session.feedback,
-         todoList: todos.map((todo) => todo.task),
+         todoList: todos,
       });
    } catch (error) {
       next(error);
@@ -41,6 +45,24 @@ router.post("/todo", privateRoute, async (req, res, next) => {
          return res.redirect("/dashboard");
       }
       req.session.feedback = "There was a problem in adding todo try again.";
+      return res.redirect("/dashboard");
+   } catch (error) {
+      next(error);
+   }
+});
+
+router.get("/todo/:id", privateRoute, async (req, res, next) => {
+   const todo_id = req.params.id;
+   if (!todo_id) {
+      req.session.feedback = "Couldn't delete task";
+      return res.redirect("/dashboard");
+   }
+   try {
+      const result = await removeTodo(todo_id, req.session.uid);
+      if (result.affectedRows) {
+         return res.redirect("/dashboard");
+      }
+      req.session.feedback = "There was a problem in removing todo try again.";
       return res.redirect("/dashboard");
    } catch (error) {
       next(error);
