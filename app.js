@@ -1,13 +1,12 @@
 const path = require("path");
-const redis = require("redis");
 const logger = require("morgan");
 const express = require("express");
 const config = require("./configs");
 const flash = require("express-flash");
+const redisStore = require("./services/redisStore");
 const session = require("express-session");
 const loginRouter = require("./routes/login");
 const indexRouter = require("./routes/index");
-const connectRedis = require("connect-redis");
 const registerRouter = require("./routes/register");
 const dashboardRouter = require("./routes/dashboard");
 const sassMiddleware = require("node-sass-middleware");
@@ -26,17 +25,12 @@ app.set("layout", "layout/layout");
 app.set("views", VIEWS_PATH);
 app.set("view engine", "ejs");
 
-/* Redis Store  */
-const RedisStore = connectRedis(session);
-const redisClient = redis.createClient();
-const store = new RedisStore({ client: redisClient });
-
 /* Middlewares */
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(sassMiddleware(config.sassConfig));
-app.use(session({ store, ...config.session }));
+app.use(session({ store: redisStore.store, ...config.session }));
 app.use(flash());
 
 /* Static */
