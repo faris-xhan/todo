@@ -3,7 +3,7 @@ const userServices = require("../services/userServices");
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
-   res.render("register", { title: "TODO - Login" });
+   res.render("register", { title: "TODO - Register" });
 });
 
 router.post("/", async (req, res, next) => {
