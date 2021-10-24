@@ -6,15 +6,18 @@ const router = express.Router();
 
 /* GET home page. */
 router.get("/", privateRoute, async (req, res, next) => {
-   const [user] = await getUser(req.session.uname, "123");
-   const todos = await getTodos(user.id);
-   res.render("dashboard", {
-      title: "Dashboard",
-      user: {
-         uname: req.session.uname,
-      },
-      todoList: todos.map((todo) => todo.task),
-   });
+   try {
+      const todos = await getTodos(req.session.uid);
+      res.render("dashboard", {
+         title: "Dashboard",
+         user: {
+            uname: req.session.uname,
+         },
+         todoList: todos.map((todo) => todo.task),
+      });
+   } catch (error) {
+      next(error);
+   }
 });
 
 router.get("/logout", privateRoute, (req, res, next) => {
