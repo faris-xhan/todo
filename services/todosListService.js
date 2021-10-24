@@ -9,7 +9,8 @@ const getTodos = async (user_id) => {
 
 const createTodo = async (owner_id, task) => {
    const result = await db.query(
-      `INSERT INTO todosList(onwer_id, task) VLAUES(?, ?)`[(owner_id, task)]
+      `INSERT INTO todosList(owner_id, task) VALUES(?, ?)`,
+      [owner_id, task]
    );
 
    return result;
