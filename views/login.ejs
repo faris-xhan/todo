@@ -3,7 +3,7 @@
       <form action="/login" method="POST">
          <h1>Login</h1>
 
-         <p><%= locals?.message %></p>
+         <p><%= locals?.message || locals?.messages?.feedback %></p>
          <div class="form-item">
             <label for="uname">Username </label>
             <input
