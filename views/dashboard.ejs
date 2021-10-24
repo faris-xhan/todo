@@ -1,6 +1,7 @@
 <main>
    <div class="container">
       <h1>Welcome <%= locals?.user?.uname %></h1>
+      <a href="dashboard/logout">Logout</a>
       <form action="/todo" method="post">
          <input type="text" />
          <button type="submit">Add Task</button>
