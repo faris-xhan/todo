@@ -1,6 +1,6 @@
 const express = require("express");
 const privateRoute = require("../middlewares/privateRoute");
-const { getTodos } = require("../services/todosListService");
+const { getTodos, createTodo } = require("../services/todosListService");
 const router = express.Router();
 
 /* GET home page. */
@@ -10,6 +10,7 @@ router.get("/", privateRoute, async (req, res, next) => {
       return res.render("dashboard", {
          title: "Dashboard",
          uname: req.session.uname,
+         feedback: req.session.feedback,
          todoList: todos.map((todo) => todo.task),
       });
    } catch (error) {
@@ -24,6 +25,26 @@ router.get("/logout", privateRoute, (req, res, next) => {
       }
       res.redirect("/");
    });
+});
+
+router.post("/todo", privateRoute, async (req, res, next) => {
+   const { task } = req.body;
+
+   if (!task) {
+      req.session.feedback = "please provide a task";
+      return res.redirect("/dashboard");
+   }
+
+   try {
+      const result = await createTodo(req.session.uid, task);
+      if (result.affectedRows) {
+         return res.redirect("/dashboard");
+      }
+      req.session.feedback = "There was a problem in adding todo try again.";
+      return res.redirect("/dashboard");
+   } catch (error) {
+      next(error);
+   }
 });
 
 module.exports = router;

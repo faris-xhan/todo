@@ -4,7 +4,7 @@
       <a href="dashboard/logout">Logout</a>
       <p><%= locals?.feedback %></p>
       <form action="/dashboard/todo" method="post">
-         <input type="text" />
+         <input type="text" name="task" />
          <button type="submit">Add Task</button>
       </form>
 
