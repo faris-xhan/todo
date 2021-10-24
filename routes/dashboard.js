@@ -1,7 +1,6 @@
 const express = require("express");
 const privateRoute = require("../middlewares/privateRoute");
 const { getTodos } = require("../services/todosListService");
-const { getUser } = require("../services/userServices");
 const router = express.Router();
 
 /* GET home page. */
@@ -10,9 +9,7 @@ router.get("/", privateRoute, async (req, res, next) => {
       const todos = await getTodos(req.session.uid);
       return res.render("dashboard", {
          title: "Dashboard",
-         user: {
-            uname: req.session.uname,
-         },
+         uname: req.session.uname,
          todoList: todos.map((todo) => todo.task),
       });
    } catch (error) {
