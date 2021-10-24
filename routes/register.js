@@ -1,12 +1,13 @@
 const express = require("express");
+const publicRoute = require("../middlewares/publicRoute");
 const userServices = require("../services/userServices");
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
+router.get("/", publicRoute, (req, res, next) => {
    res.render("register", { title: "TODO - Register" });
 });
 
-router.post("/", async (req, res, next) => {
+router.post("/", publicRoute, async (req, res, next) => {
    const { uname, passwd, email } = req.body;
 
    if (!uname || !passwd || !email) {
