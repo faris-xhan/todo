@@ -8,9 +8,8 @@ const registerRouter = require("./routes/register");
 const dashboardRouter = require("./routes/dashboard");
 const sassMiddleware = require("node-sass-middleware");
 const expressEjsLayout = require("express-ejs-layouts");
-const publicRoute = require("./middlewares/publicRoute");
-const privateRoute = require("./middlewares/privateRoute");
 const { catchAllNotFound, errorRoute } = require("./middlewares/errorHandler");
+const session = require("express-session");
 
 /* GLOBALS  */
 const PUBLIC_PATH = path.resolve(__dirname, "public");
@@ -29,15 +28,16 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(sassMiddleware(config.sassConfig));
+app.use(session(config.session));
 
 /* Static */
 app.use(express.static(PUBLIC_PATH));
 
 /* Routes */
-app.use("/", publicRoute, indexRouter);
-app.use("/login", publicRoute, loginRouter);
-app.use("/register", publicRoute, registerRouter);
-app.use("/dashboard", privateRoute, dashboardRouter);
+app.use("/", indexRouter);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
+app.use("/dashboard", dashboardRouter);
 
 /* Handle All The Errors */
 app.use(catchAllNotFound);
